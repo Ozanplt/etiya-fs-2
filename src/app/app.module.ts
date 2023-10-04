@@ -8,10 +8,13 @@ import { ExampleComponent } from './components/example/example.component';
 import { DemoComponent } from './components/demo/demo.component';
 import { CssWorkshopComponent } from './pages/css-workshop/css-workshop.component';
 import { FirstWorkshopComponent } from './pages/first-workshop/first-workshop.component';
+import { PostListComponent } from './pages/post-list/post-list.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AddPostComponent } from './pages/add-post/add-post.component';
 
 @NgModule({
-  declarations: [AppComponent, ExampleComponent, DemoComponent, CssWorkshopComponent, FirstWorkshopComponent], // Bu modül içerisinde tanımlanan işlevler, modulün içerisinde barındırdığı schematicler
-  imports: [BrowserModule,AppRoutingModule,FormsModule], // Bu modülün dışarıdan temin ettiği diğer modüller
+  declarations: [AppComponent, ExampleComponent, DemoComponent, CssWorkshopComponent, FirstWorkshopComponent, PostListComponent, AddPostComponent], // Bu modül içerisinde tanımlanan işlevler, modulün içerisinde barındırdığı schematicler
+  imports: [BrowserModule,AppRoutingModule,FormsModule, HttpClientModule], // Bu modülün dışarıdan temin ettiği diğer modüller
   providers: [], // Dependency Injection
   bootstrap: [AppComponent], // Uygulamanın başlayacağı ana componenti temsil eden yapı
   exports:[] // Declarations alanındaki tanımlardan hangilerini dışarıya açacağımızı belirtir.
