@@ -1,30 +1,30 @@
-import { PostService } from './../../services/post.service';
+import { LoadingService } from './../../services/loading.service';
 import { AfterContentInit, Component, OnChanges, OnInit } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
+import { PostService } from 'src/app/services/post.service';
+import { GetAllPostModel } from 'src/app/models/post/getAllPostModel';
 @Component({
   templateUrl: './post-list.component.html',
-  styleUrls: ['./post-list.component.css']
+  styleUrls: ['./post-list.component.css'],
 })
-export class PostListComponent implements OnInit,AfterContentInit,OnChanges{
-  //angular-ts tarafında dependency injection
+export class PostListComponent implements OnInit {
+  postList!: GetAllPostModel[];
+  //Angular-TS tarafında dependency injection nasıl yapılır?
+  constructor(private postService: PostService, private loadingService: LoadingService) {}
 
-  constructor(private postService: PostService){}
+  //angular hooks
+  ngOnChanges() {}
+  ngAfterContentInit(): void {}
+  ngOnInit(): void {
+    this.loadingService.isLoading$.subscribe((value) => {
+      console.log("Globaldeki loading değeri değişti yeni değer: ", +value);
+    })
 
-  ngOnChanges(){
-    console.log("ngOnChange");
-  }
-  ngOnInit(): void{
     this.fetchPosts();
   }
-  ngAfterContentInit(){
-    console.log("ngAfterContentInit");
-  }
-
-  fetchPosts(){
-    this.postService
-    .getAll()
-    .subscribe((response) => {
-      console.log(response);
+  fetchPosts() {
+    this.postService.getAll().subscribe((response) => {
+      this.postList = response;
     });
   }
 }
